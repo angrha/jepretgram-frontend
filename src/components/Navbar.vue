@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <router-link to="/" class="nav-link">Home <span class="sr-only">(current)</span></router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Features</a>
@@ -38,7 +38,7 @@ export default {
   methods: {
     ...mapActions([
       'checkLogin',
-      'logout'
+      'signout'
     ]),
     created () {
       this.checkLogin()

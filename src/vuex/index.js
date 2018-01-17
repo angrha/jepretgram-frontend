@@ -5,9 +5,7 @@ import router from '../router'
 
 Vue.use(Vuex)
 
-const http = axios.create({
-  baseUrl: 'http://localhost:3000'
-})
+const baseUrl = 'http://localhost:3000'
 
 const store = new Vuex.Store({
   state: {
@@ -20,11 +18,11 @@ const store = new Vuex.Store({
   },
   actions: {
     signin ({ commit }, payload) {
-      http.post(this.baseUrl + '/api/users/signin', payload)
+      axios.post(baseUrl + '/api/users/signin', payload)
         .then(response => {
           localStorage.setItem('authLogin', response.data.token)
           commit('setLogin', true)
-          // router.push({name: 'dashboard'})
+          router.push({name: 'Dashboard'})
         })
         .catch(err => {
           console.log(err)
@@ -38,7 +36,7 @@ const store = new Vuex.Store({
       }
     },
     signup ({commit}, payload) {
-      http.post(this.baseUrl + '/api/users/signup', payload)
+      axios.post(baseUrl + '/api/users/signup', payload)
         .then(response => {
           console.log(response)
           router.push({name: 'home'})
