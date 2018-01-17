@@ -9,8 +9,7 @@
         <label for="exampleInputPassword1" class="lbl">Password</label>
         <input v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
       </div>
-      <router-link to="signup" type="button" class="btn btn-info rgt">Sign up</router-link>
-      <button @click="signin" type="button" class="btn btn-success rgt">Login</button>
+      <button @click="signup" type="button" class="btn btn-success rgt">Submit</button>
     </div>
   </div>
 </template>
@@ -25,17 +24,14 @@ export default {
     }
   },
   methods: {
-    signin () {
-      axios.post('http://localhost:3000/api/users/signin', {
+    signup () {
+      axios.post('http://localhost:3000/api/users/signup', {
         email: this.email,
         password: this.password
       })
         .then(response => {
-          localStorage.setItem('authLogin', response.data.token)
-          this.email = ''
-          this.password = ''
-          this.$emit('navigasi-login', true)
-          // this.$router.push({name: 'dashboard'})
+          console.log(response)
+          this.$router.push({name: 'home'})
         })
         .catch(err => {
           console.log(err)
@@ -46,17 +42,5 @@ export default {
 </script>
 
 <style>
-.lbl {
-  float: left;
-}
-.container {
-  margin-top: 5%;
-}
-.ctr {
-  margin: auto;
-}
-.rgt {
-  float: right;
-  margin: 0% 1%;
-}
+
 </style>
