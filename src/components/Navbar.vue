@@ -34,7 +34,7 @@ export default {
     signout () {
       localStorage.clear()
       this.$emit('navigasi-login', false)
-      // this.$router.push({ name: 'home' })
+      this.$router.push({ name: 'home' })
     }
   }
 }
