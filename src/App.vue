@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar @navigasi-login="checkLogin" :isLogin="login"/>
-    <router-view @navigasi-login="checkLogin"/>
+    <Navbar/>
+    <router-view/>
   </div>
 </template>
 
@@ -11,23 +11,6 @@ export default {
   name: 'App',
   components: {
     Navbar
-  },
-  data () {
-    return {
-      login: false
-    }
-  },
-  methods: {
-    checkLogin (logged) {
-      if (localStorage.getItem('authLogin')) {
-        this.login = logged
-      } else {
-        this.login = false
-      }
-    }
-  },
-  created () {
-    this.checkLogin()
   }
 }
 </script>

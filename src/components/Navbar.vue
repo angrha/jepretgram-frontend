@@ -21,25 +21,28 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <button v-if="isLogin" @click="signout()" class="btn btn-secondary my-2 my-sm-0" type="button">Log out</button>
+      <button v-if="login" @click="signout()" class="btn btn-secondary my-2 my-sm-0" type="button">Log out</button>
     </form>
   </div>
 </nav>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
-  props: ['isLogin'],
+  computed: {
+    ...mapState([
+      'login'
+    ])
+  },
   methods: {
-    signout () {
-      localStorage.clear()
-      this.$emit('navigasi-login', false)
-      this.$router.push({ name: 'home' })
+    ...mapActions([
+      'checkLogin',
+      'logout'
+    ]),
+    created () {
+      this.checkLogin()
     }
   }
 }
 </script>
-
-<style>
-
-</style>

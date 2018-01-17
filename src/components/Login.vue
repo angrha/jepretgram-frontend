@@ -3,44 +3,33 @@
     <div>
       <div class="form-group">
         <label for="exampleInputEmail1" class="lbl">Email address</label>
-        <input v-model="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" type="email">
+        <input v-model="formData.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" type="email">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" class="lbl">Password</label>
-        <input v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
+        <input v-model="formData.password" class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
       </div>
       <router-link to="signup" type="button" class="btn btn-info rgt">Sign up</router-link>
-      <button @click="signin" type="button" class="btn btn-success rgt">Login</button>
+      <button @click="signin(formData)" type="button" class="btn btn-success rgt">Login</button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import {mapActions} from 'vuex'
 export default {
   data () {
     return {
-      email: '',
-      password: ''
+      formData: {
+        email: '',
+        password: ''
+      }
     }
   },
   methods: {
-    signin () {
-      axios.post('http://localhost:3000/api/users/signin', {
-        email: this.email,
-        password: this.password
-      })
-        .then(response => {
-          localStorage.setItem('authLogin', response.data.token)
-          this.email = ''
-          this.password = ''
-          this.$emit('navigasi-login', true)
-          // this.$router.push({name: 'dashboard'})
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
+    ...mapActions([
+      'signin'
+    ])
   }
 }
 </script>
